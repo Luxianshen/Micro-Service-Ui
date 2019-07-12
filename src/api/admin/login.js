@@ -6,23 +6,20 @@ const basicAuthorization = 'Basic ' + btoa('web_app:spring-microservice-exam-sec
 
 /**
  * 登录
- * @param tenantCode 租户标识
  * @param identifier 账号
  * @param credential 密码
  * @param code 验证码
  * @param randomStr 随机数
  */
-export function loginByUsername (tenantCode, identifier, credential, code, randomStr) {
-  const grantType = 'password'
-  const scope = 'read'
+export function loginByUsername (identifier, credential, code, randomStr) {
+  const loginType = 0
   return request({
-    url: '/api/auth/oauth/token',
+    url: '/api/token/login',
     headers: {
-      'Authorization': basicAuthorization,
-      'Tenant-Code': tenantCode
+      'Authorization': basicAuthorization
     },
     method: 'post',
-    params: { username: identifier, credential, randomStr, code, grant_type: grantType, scope }
+    params: { userName: identifier, passWord: credential, randomStr, validCode: code, loginType: loginType }
   })
 }
 
@@ -35,7 +32,7 @@ export function logout (accesstoken, refreshToken) {
 
 export function getUserInfo (token) {
   return request({
-    url: '/api/user/v1/user/info',
+    url: '/api/v1/user/info',
     method: 'get'
   })
 }

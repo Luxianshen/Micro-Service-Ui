@@ -69,7 +69,6 @@ export default {
   data () {
     return {
       loginForm: {
-        tenantCode: '',
         identifier: '',
         credential: '',
         code: '',
@@ -134,6 +133,7 @@ export default {
     handleLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          console.log(this.loginForm)
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
             this.loading = false

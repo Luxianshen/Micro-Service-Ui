@@ -27,9 +27,6 @@ const user = {
     }) || '',
     refresh_token: getStore({
       name: 'refresh_token'
-    }) || '',
-    tenantCode: getStore({
-      name: 'tenantCode'
     }) || ''
   },
   actions: {
@@ -46,13 +43,12 @@ const user = {
           param: ['credential']
         })
 
-        loginByUsername(user.tenantCode, user.identifier, user.credential, user.code, user.randomStr).then(response => {
+        loginByUsername(user.identifier, user.credential, user.code, user.randomStr).then(response => {
           const data = response.data
           setToken(data.access_token)
           setRefreshToken(data.refresh_token)
           commit('SET_ACCESS_TOKEN', data.access_token)
           commit('SET_REFRESH_TOKEN', data.refresh_token)
-          commit('SET_TENANT_CODE', data.tenantCode)
           commit('CLEAR_LOCK')
           resolve()
         }).catch(error => {
@@ -96,8 +92,6 @@ const user = {
           commit('DEL_ALL_TAG')
           // 清除系统配置信息
           commit('SET_SYS_CONFIG', {})
-          // 清除租户信息
-          commit('SET_TENANT_CODE', {})
           removeToken()
           removeRefreshToken()
           resolve()
@@ -123,8 +117,6 @@ const user = {
         commit('DEL_ALL_TAG')
         // 清除系统配置信息
         commit('SET_SYS_CONFIG', {})
-        // 清除租户信息
-        commit('SET_TENANT_CODE', {})
         removeToken()
         removeRefreshToken()
         resolve()
@@ -191,13 +183,6 @@ const user = {
       setStore({
         name: 'permissions',
         content: state.permissions
-      })
-    },
-    SET_TENANT_CODE: (state, tenantCode) => {
-      state.tenantCode = tenantCode
-      setStore({
-        name: 'tenantCode',
-        content: state.tenantCode
       })
     }
   }
