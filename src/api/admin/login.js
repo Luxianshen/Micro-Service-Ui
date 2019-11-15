@@ -14,7 +14,7 @@ const basicAuthorization = 'Basic ' + btoa('web_app:spring-microservice-exam-sec
 export function loginByUsername (identifier, credential, code, randomStr) {
   const loginType = 0
   return request({
-    url: '/api/token/login',
+    url: '/token/login',
     headers: {
       'Authorization': basicAuthorization
     },
