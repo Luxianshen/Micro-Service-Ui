@@ -63,10 +63,11 @@ const user = {
     }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
-          const data = response.data.data
-          commit('SET_ROLES', data.roles)
+          debugger
+          const data = response.data
+          // commit('SET_ROLES', data.roles)
           commit('SET_USER_INFO', data)
-          commit('SET_PERMISSIONS', data.permissions)
+          // commit('SET_PERMISSIONS', data.permissions)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -126,6 +127,7 @@ const user = {
     GetMenu ({ commit }) {
       return new Promise(resolve => {
         GetMenu().then((res) => {
+          debugger
           const data = res.data
           data.forEach(ele => {
             ele.children.forEach(child => {

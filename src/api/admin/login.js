@@ -1,6 +1,6 @@
 import request from '@/router/axios'
 import { getRefreshToken } from '@/utils/auth'
-const baseAuthenticationUrl = '/api/auth/v1/authentication/'
+const baseAuthenticationUrl = '/token/'
 
 const basicAuthorization = 'Basic ' + btoa('web_app:spring-microservice-exam-secret')
 
@@ -14,7 +14,7 @@ const basicAuthorization = 'Basic ' + btoa('web_app:spring-microservice-exam-sec
 export function loginByUsername (identifier, credential, code, randomStr) {
   const loginType = 0
   return request({
-    url: '/token/login',
+    url: baseAuthenticationUrl + 'login',
     headers: {
       'Authorization': basicAuthorization
     },

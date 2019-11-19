@@ -7,7 +7,7 @@ import { Message } from 'element-ui'
 import errorCode from '@/const/errorCode'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'// progress bar style
-const whiteList = ['/auth/authentication/removeToken']// 白名单
+const whiteList = ['/token/removeToken']// 白名单
 
 // 超时时间
 axios.defaults.timeout = 30000
