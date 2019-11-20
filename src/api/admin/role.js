@@ -1,90 +1,115 @@
 import request from '@/router/axios'
 
-const baseRoleUrl = '/api/user/v1/role/'
+const BasicUrl = '/api/v1/auth/role/'
 
-export function roleList () {
+/**
+ * 保存信息
+ * @param {*} param0
+ */
+export const save = info => {
   return request({
-    url: baseRoleUrl + 'roleList',
-    method: 'get'
+    url: BasicUrl + 'save',
+    data: info,
+    method: 'post'
   })
 }
 
-export function fetchList (query) {
+/**
+ * 更新信息
+ * @param {*} param0
+ */
+export const update = info => {
   return request({
-    url: baseRoleUrl + 'roleList',
-    method: 'get',
-    params: query
+    url: BasicUrl + 'update',
+    data: info,
+    method: 'post'
   })
 }
 
-export function allRoles (query) {
+/**
+ * 获取信息
+ * @param {*} id
+ */
+export const get = id => {
   return request({
-    url: baseRoleUrl + 'allRoles',
-    method: 'get',
-    params: query
-  })
-}
-
-export function getObj (id) {
-  return request({
-    url: baseRoleUrl + id,
-    method: 'get'
-  })
-}
-
-export function addObj (obj) {
-  return request({
-    url: baseRoleUrl,
-    method: 'post',
-    data: obj
-  })
-}
-
-export function putObj (obj) {
-  return request({
-    url: baseRoleUrl,
-    method: 'put',
-    data: obj
-  })
-}
-
-export function delObj (id) {
-  return request({
-    url: baseRoleUrl + id,
-    method: 'delete'
-  })
-}
-
-export function permissionUpdate (id, menus) {
-  return request({
-    url: baseRoleUrl + 'roleMenuUpdate',
-    method: 'put',
+    url: BasicUrl + 'get',
     data: {
-      id: id,
-      menuIds: menus
-    }
+      id: id
+    },
+    method: 'post'
   })
 }
 
-export function fetchRoleTree (roleName) {
+/**
+ * 删除系统信息
+ * @param {*} id
+ */
+export const remove = id => {
   return request({
-    url: '/api/user/v1/menu/roleTree/' + roleName,
-    method: 'get'
+    url: BasicUrl + 'delete',
+    data: {
+      id: id
+    },
+    method: 'post'
   })
 }
 
-export function fetchDeptTree (query) {
+/**
+ * 分页查询系统信息
+ * @param {*} page
+ */
+export const page = page => {
   return request({
-    url: '/api/user/v1/dept/depts',
-    method: 'get',
-    params: query
+    url: BasicUrl + 'page',
+    data: page,
+    method: 'post'
   })
 }
 
-export function delAllObj (obj) {
+/**
+ * 获取用户列表（含授权状态）
+ * @param {*} page
+ */
+export const authUserPage = page => {
   return request({
-    url: baseRoleUrl + 'deleteAll',
-    method: 'post',
-    data: obj
+    url: BasicUrl + 'authUserPage',
+    data: page,
+    method: 'post'
+  })
+}
+
+/**
+ * 授权角色给用户
+ * @param {*} params
+ */
+export const grant = params => {
+  return request({
+    url: BasicUrl + 'grant',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 取消用户角色授权
+ * @param {*} params
+ */
+export const revoke = params => {
+  return request({
+    url: BasicUrl + 'revoke',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 获取权限树
+ * @param {*} params
+ */
+export const findAuthPermissionTree = params => {
+  return request({
+    url: BasicUrl + 'findAuthPermissionTree',
+    data: params,
+    method: 'post'
   })
 }
