@@ -60,7 +60,7 @@ export default {
         }
       })
     },
-    auth(data) {
+    auth (data) {
       const params = {
         roleId: this.roleId,
         relType: 0,

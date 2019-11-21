@@ -1,93 +1,79 @@
 import request from '@/router/axios'
 
-const baseUserUrl = '/api/user/v1/user/'
+const baseUserUrl = '/api/v1/user/'
 
-export function fetchList (query) {
+/**
+ * 新增用户
+ * @param {*} user
+ */
+export const save = user => {
   return request({
-    url: baseUserUrl + 'userList',
-    method: 'get',
-    params: query
-  })
-}
+    url: baseUserUrl + 'register',
+    data: user,
+    method: 'post'
+  });
+};
 
-export function addObj (obj) {
+/**
+ * 更新用户信息
+ * @param {} user
+ */
+export const update = user => {
   return request({
-    url: baseUserUrl,
-    method: 'post',
-    data: obj
-  })
-}
+    url: baseUserUrl + 'update',
+    data: user,
+    method: 'post'
+  });
+};
 
-export function getObj (id) {
+/**
+ * 获取用户详情
+ * @param {*} id
+ */
+export const get = id => {
   return request({
-    url: baseUserUrl + id,
-    method: 'get'
-  })
-}
+    url: baseUserUrl + 'get',
+    data: {
+      id: id
+    },
+    method: 'post'
+  });
+};
 
-export function delObj (id) {
+/**
+ * 删除用户信息
+ * @param {*} id
+ */
+export const remove = id => {
   return request({
-    url: baseUserUrl + id,
-    method: 'delete'
-  })
-}
+    url: baseUserUrl + 'delete',
+    data: {
+      id: id
+    },
+    method: 'post'
+  });
+};
 
-export function putObj (obj) {
+/**
+ * 分页查询用户信息
+ * @param {*} pageParam
+ */
+export const page = pageParam => {
   return request({
-    url: baseUserUrl,
-    method: 'put',
-    data: obj
-  })
-}
+    url: baseUserUrl + 'page',
+    data: pageParam,
+    method: 'post'
+  });
+};
 
-export function updateObjInfo (obj) {
+/**
+ * 修改密码
+ * @param {*} params
+ */
+export const changeAuth = params => {
   return request({
-    url: baseUserUrl + 'updateInfo',
-    method: 'put',
-    data: obj
-  })
-}
-
-export function updatePassword (obj) {
-  return request({
-    url: baseUserUrl + 'updatePassword',
-    method: 'put',
-    data: obj
-  })
-}
-
-export function updateAvatar (obj) {
-  return request({
-    url: baseUserUrl + 'updateAvatar',
-    method: 'put',
-    data: obj
-  })
-}
-
-export function delAllObj (obj) {
-  return request({
-    url: baseUserUrl + 'deleteAll',
-    method: 'post',
-    data: obj
-  })
-}
-
-// 导出
-export function exportObj (obj) {
-  return request({
-    url: baseUserUrl + 'export',
-    method: 'post',
-    responseType: 'arraybuffer',
-    headers: { 'filename': 'utf-8' },
-    data: obj
-  })
-}
-
-// 重置密码
-export function resetPassword (obj) {
-  return request({
-    url: baseUserUrl + 'resetPassword',
-    method: 'put',
-    data: obj
-  })
-}
+    url: baseUserUrl + 'changeAuth',
+    data: params,
+    method: 'post'
+  });
+};

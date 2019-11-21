@@ -18,6 +18,7 @@ NProgress.configure({ showSpinner: false })// NProgress Configuration
 // HTTP request拦截
 axios.interceptors.request.use(config => {
   NProgress.start() // start progress bar
+  config.headers['Content-Type'] = 'application/json'
   if (store.getters.access_token && whiteList.indexOf(config.url) === -1) {
     const authorization = config.headers['Authorization']
     if (authorization === undefined || authorization.indexOf('Basic') === -1) {
@@ -29,6 +30,15 @@ axios.interceptors.request.use(config => {
   if (tenantCode === undefined) {
     config.headers['Tenant-Code'] = getTenantCode()
   }
+  // transform form data as json string
+  config.transformRequest = [function (data) {
+    const requestBody = JSON.stringify({
+      timestamp: new Date().getTime(),
+      sign: 'nosign',
+      data: data
+    })
+    return requestBody
+  }]
   return config
 }, error => {
   return Promise.reject(error)
