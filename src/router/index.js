@@ -105,48 +105,53 @@ export const constantRouterMap = [
     path: '/lock',
     name: '锁屏页',
     component: () => import('@/views/lock/index')
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: 'admin/permission',
-    children: [
-      {
-        path: 'admin/permission',
-        component: () => import('@/views/admin/permission/index'),
-        name: '菜单管理',
-        title: '菜单管理',
-        icon: 'dashboard',
-        noCache: true
-      }
-    ]
-  },
-  {
-    path: '',
-    component: Layout,
-    redirect: 'admin/role',
-    children: [
-      {
-        path: 'admin/role',
-        component: () => import('@/views/admin/role/index'),
-        name: '角色管理',
-        title: '角色管理',
-        icon: 'dashboard',
-        noCache: true
-      }
-    ]
-  },
-  {
-    path: 'role/auth/:id',
-    component: () => import('@/views/admin/role/auth'),
-    name: 'adminRoleAuth',
-    meta: {
-      title: 'adminRoleAuth',
-      icon: 'auth',
-      roles: ['base:admin:super']
-    },
-    hidden: true
   }
+  // ,
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: 'admin/permission',
+  //   children: [
+  //     {
+  //       path: 'admin/permission',
+  //       component: () => import('@/views/admin/permission/index'),
+  //       name: '菜单管理',
+  //       title: '菜单管理',
+  //       icon: 'dashboard',
+  //       noCache: true
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: 'admin/role',
+  //   children: [
+  //     {
+  //       path: 'admin/role',
+  //       component: () => import('@/views/admin/role/index'),
+  //       name: '角色管理',
+  //       title: '角色管理',
+  //       icon: 'dashboard',
+  //       noCache: true
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: 'admin/role/auth/:id',
+  //   children: [
+  //     {
+  //       path: 'admin/role/auth/:id',
+  //       component: () => import('@/views/admin/role/auth'),
+  //       name: '角色授权',
+  //       title: '角色授权',
+  //       icon: 'auth',
+  //       noCache: true
+  //     }
+  //   ]
+  // }
 ]
 
 export default new Router({

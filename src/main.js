@@ -19,6 +19,9 @@ import { loadStyle } from './utils/util'
 import * as urls from '@/config/env'
 import Spinner from 'vue-spinkit'
 
+import VOrgTree from 'v-org-tree'
+import 'v-org-tree/dist/v-org-tree.css'
+
 const iconfontVersion = ['567566_r22zi6t8noas8aor', '599693_0b5sleso3f1j1yvi', '667895_xte3dcfrvbo6r']
 const iconfontUrl = `//at.alicdn.com/t/font_$key.css`
 
@@ -26,6 +29,8 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
+
+Vue.use(VOrgTree)
 
 // 使用登录页粒子效果插件
 Vue.use(VueParticles)

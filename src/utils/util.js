@@ -43,6 +43,7 @@ export const initMenu = (router, menu) => {
 }
 
 export const formatRoutes = (aMenu) => {
+  debugger
   const aRouter = []
   aMenu.forEach(oMenu => {
     const {

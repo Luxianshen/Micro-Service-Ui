@@ -102,7 +102,7 @@ export default {
         })
       }
     },
-    nodeRender(h, data) {
+    nodeRender (h, data) {
       const color = data.checked === true ? 'success' : 'danger'
       return (
         <el-tag type={color}>{data.label}</el-tag>
