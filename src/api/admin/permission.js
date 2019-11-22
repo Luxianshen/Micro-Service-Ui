@@ -20,7 +20,7 @@ export const save = permission => {
  */
 export const update = permission => {
   return request({
-    url: '/auth/menu/update',
+    url: BasicUrl + 'update',
     data: permission,
     method: 'post'
   })
@@ -32,7 +32,7 @@ export const update = permission => {
  */
 export const get = id => {
   return request({
-    url: '/auth/menu/get',
+    url: BasicUrl + 'get',
     data: {
       id: id
     },
@@ -46,7 +46,7 @@ export const get = id => {
  */
 export const remove = id => {
   return request({
-    url: '/auth/menu/delete',
+    url: BasicUrl + 'delete',
     data: {
       id: id
     },

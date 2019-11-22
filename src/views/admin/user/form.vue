@@ -11,8 +11,8 @@
     <el-form-item label="帐号" prop="agentId">
       <el-input v-model="formData.agentId" type="text" placeholder="请输入帐号" :readonly="action === 'edit'" />
     </el-form-item>
-    <el-form-item v-if="action === 'add'" label="密码" prop="agentAuth">
-      <el-input v-model="formData.agentAuth" type="password" placeholder="请输入密码" />
+    <el-form-item v-if="action === 'add'" label="密码" prop="tmpAuth">
+      <el-input v-model="formData.tmpAuth" type="password" placeholder="请输入密码" />
     </el-form-item>
     <el-form-item label="昵称" prop="name">
       <el-input v-model="formData.name" type="text" placeholder="请输入用户昵称/姓名" />

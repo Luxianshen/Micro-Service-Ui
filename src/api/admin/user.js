@@ -11,8 +11,8 @@ export const save = user => {
     url: baseUserUrl + 'register',
     data: user,
     method: 'post'
-  });
-};
+  })
+}
 
 /**
  * 更新用户信息
@@ -23,8 +23,8 @@ export const update = user => {
     url: baseUserUrl + 'update',
     data: user,
     method: 'post'
-  });
-};
+  })
+}
 
 /**
  * 获取用户详情
@@ -37,8 +37,8 @@ export const get = id => {
       id: id
     },
     method: 'post'
-  });
-};
+  })
+}
 
 /**
  * 删除用户信息
@@ -51,8 +51,8 @@ export const remove = id => {
       id: id
     },
     method: 'post'
-  });
-};
+  })
+}
 
 /**
  * 分页查询用户信息
@@ -63,8 +63,8 @@ export const page = pageParam => {
     url: baseUserUrl + 'page',
     data: pageParam,
     method: 'post'
-  });
-};
+  })
+}
 
 /**
  * 修改密码
@@ -75,5 +75,5 @@ export const changeAuth = params => {
     url: baseUserUrl + 'changeAuth',
     data: params,
     method: 'post'
-  });
-};
+  })
+}

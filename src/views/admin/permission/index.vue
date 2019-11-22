@@ -32,7 +32,9 @@
             >{{ getPermissionTypeText(scope.row.type) }}</el-tag>
           </template>
         </el-table-column> -->
-        <!-- <el-table-column prop="title" label="名称" /> -->
+        <el-table-column prop="name" label="名称" />
+        <el-table-column prop="path" label="路劲" />
+        <el-table-column prop="component" label="组成" />
         <el-table-column prop="permissionCode" label="权限编码" />
         <el-table-column prop="action" label="操作">
           <template slot-scope="scope">

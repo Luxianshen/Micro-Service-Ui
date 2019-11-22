@@ -22,7 +22,7 @@ axios.interceptors.request.use(config => {
   if (store.getters.access_token && whiteList.indexOf(config.url) === -1) {
     const authorization = config.headers['Authorization']
     if (authorization === undefined || authorization.indexOf('Basic') === -1) {
-      config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带token
+      config.headers['Authorization'] = getToken() // 让每个请求携带token
     }
   }
   // 增加租户编号请求头

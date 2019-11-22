@@ -11,13 +11,23 @@
     <el-row>
       <el-col>
         <el-form-item label="所属系统" prop="sysId">
-          <SystemType v-model="formData.sysId" />
+            <el-select v-model="formData.sysId" class="filter-item" placeholder="请选择系统">
+                <el-option v-for="item in sysOptions" :key="item" :label="item | sysFilter" :value="item"/>
+            </el-select>
         </el-form-item>
         <el-form-item label="类型" prop="type">
-          <PermissionType v-model="formData.type" />
+          <el-select v-model="formData.type" class="filter-item" placeholder="请选择资源请求类型">
+                <el-option v-for="item in typeOptions" :key="item" :label="item | typeFilter" :value="item"/>
+          </el-select>
         </el-form-item>
-        <el-form-item label="名称" prop="title">
-          <el-input v-model="formData.title" type="text" placeholder="请输入权限名称" />
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="formData.name" type="text" placeholder="请输入权限名称" />
+        </el-form-item>
+        <el-form-item label="路劲" prop="path">
+          <el-input v-model="formData.path" type="text" placeholder="请输入路劲" />
+        </el-form-item>
+        <el-form-item label="组件名称" prop="component">
+          <el-input v-model="formData.component" type="text" placeholder="请输入组件名称" />
         </el-form-item>
         <el-form-item label="权限编码" prop="permissionCode">
           <el-input v-model="formData.permissionCode" type="text" placeholder="请输入权限编码(例：admin:user)" />
@@ -50,24 +60,39 @@
   </el-form>
 </template>
 <script>
-import { get, save, update } from '@/api/admin/permission';
-import PermissionType from '@/components/admin/permission-type';
-import SystemType from '@/components/admin/system-type';
+import { get, save, update } from '@/api/admin/permission'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SysPermissionFormDialog',
-  components: {
-    PermissionType,
-    SystemType
-  },
+  components: {},
   props: {
     action: {
       type: String,
       default: 'add'
     }
   },
+  filters: {
+    sysFilter (sys) {
+      const sysMap = {
+        0: '基础系统',
+        1: '内部系统',
+        2: '第三方系统'
+      }
+      return sysMap[sys]
+    },
+    typeFilter (type) {
+      const typeMap = {
+        0: '菜单',
+        1: '接口'
+      }
+      return typeMap[type]
+    }
+  },
   data() {
     return {
+      sysOptions: ['0', '1','2'],
+      typeOptions: ['0', '1'],
       formRules: {
         title: [
           { required: true, message: '名称不能为空！', trigger: 'blur' }

@@ -64,7 +64,7 @@ const user = {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(response => {
           debugger
-          const data = response.data
+          const data = response.data.data
           // commit('SET_ROLES', data.roles)
           commit('SET_USER_INFO', data)
           // commit('SET_PERMISSIONS', data.permissions)
@@ -128,7 +128,7 @@ const user = {
       return new Promise(resolve => {
         GetMenu().then((res) => {
           debugger
-          const data = res.data
+          const data = res.data.data
           data.forEach(ele => {
             ele.children.forEach(child => {
               if (!validatenull(child.component)) child.path = `${ele.path}/${child.path}`

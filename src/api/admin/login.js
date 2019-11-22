@@ -1,5 +1,5 @@
 import request from '@/router/axios'
-import { getRefreshToken } from '@/utils/auth'
+import { getRefreshToken, getToken } from '@/utils/auth'
 const baseAuthenticationUrl = '/token/'
 
 const basicAuthorization = 'Basic ' + btoa('web_app:spring-microservice-exam-secret')
@@ -26,6 +26,9 @@ export function loginByUsername (identifier, credential, code, randomStr) {
 export function logout (accesstoken, refreshToken) {
   return request({
     url: baseAuthenticationUrl + 'removeToken',
+    headers: {
+      'Authorization': getToken()
+    },
     method: 'post'
   })
 }

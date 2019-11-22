@@ -9,7 +9,9 @@
       <input v-model="formData.id" type="hidden">
     </el-form-item>
     <el-form-item label="所属系统" prop="sysId">
-      <SystemType v-model="formData.sysId" placeholder="所属系统" />
+        <el-select v-model="formData.sysId" class="filter-item" placeholder="请选择系统">
+            <el-option v-for="item in sysOptions" :key="item" :label="item | sysFilter" :value="item"/>
+        </el-select>
     </el-form-item>
     <el-form-item label="名称" prop="roleName">
       <el-input v-model="formData.roleName" type="text" placeholder="请输入名称" />
@@ -34,8 +36,16 @@ import SystemType from '@/components/admin/system-type';
 
 export default {
   name: 'RoleForm',
-  components: {
-    SystemType
+  components: {},
+  filters: {
+    sysFilter (sys) {
+      const sysMap = {
+        0: '基础系统',
+        1: '内部系统',
+        2: '第三方系统'
+      }
+      return sysMap[sys]
+    }
   },
   props: {
     action: {
@@ -45,6 +55,7 @@ export default {
   },
   data() {
     return {
+      sysOptions: ['0', '1','2'],
       formRules: {
         sysId: [
           { required: true, message: '所属系统不能为空' }
