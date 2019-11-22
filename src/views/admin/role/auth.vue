@@ -12,12 +12,12 @@
           <el-tab-pane label="菜单" icon="md-menu">
             <AuthPermissionTree :role-id="$route.params.id" :type="0" />
           </el-tab-pane>
-          <el-tab-pane label="功能" icon="md-apps">
-            <AuthPermissionTree :role-id="$route.params.id" :type="2" />
-          </el-tab-pane>
           <el-tab-pane label="接口" icon="md-aperture">
             <AuthPermissionTree :role-id="$route.params.id" :type="1" />
           </el-tab-pane>
+          <!-- <el-tab-pane label="功能" icon="md-apps">
+            <AuthPermissionTree :role-id="$route.params.id" :type="2" />
+          </el-tab-pane> -->
         </el-tabs>
       </p>
     </el-card>

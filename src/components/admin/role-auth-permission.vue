@@ -63,8 +63,7 @@ export default {
     auth (data) {
       const params = {
         roleId: this.roleId,
-        relType: 0,
-        relId: data.id
+        menuId: data.id
       }
       if (!data.checked) {
         grant(params).then(response => {
