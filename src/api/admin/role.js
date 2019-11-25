@@ -82,6 +82,30 @@ export const authUserPage = page => {
  * 授权角色给用户
  * @param {*} params
  */
+export const addUser = params => {
+  return request({
+    url: BasicUrl + 'addUser',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 删除用户角色
+ * @param {*} params
+ */
+export const removeUser = params => {
+  return request({
+    url: BasicUrl + 'removeUser',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 授权权限给角色
+ * @param {*} params
+ */
 export const grant = params => {
   return request({
     url: BasicUrl + 'grant',
@@ -91,7 +115,7 @@ export const grant = params => {
 }
 
 /**
- * 取消用户角色授权
+ * 取消角色权限
  * @param {*} params
  */
 export const revoke = params => {

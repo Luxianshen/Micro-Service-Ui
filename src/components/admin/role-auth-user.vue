@@ -52,7 +52,7 @@
                 :type="scope.row.checked !== true ? 'success' : 'warning'"
                 :icon="scope.row.checked !== true ? 'el-icon-setting' : 'el-icon-delete'"
                 circle
-                @click.native.prevent="scope.row.checked !== true ? grant(scope.$index, scope.row) : revoke(scope.$index, scope.row)"
+                @click.native.prevent="scope.row.checked !== true ? addUser(scope.$index, scope.row) : removeUser(scope.$index, scope.row)"
               />
             </el-button-group>
           </template>
@@ -63,7 +63,7 @@
 </template>
 <script>
 import DataTable from '@/components/datatable/data-table';
-import { authUserPage, grant, revoke } from '@/api/admin/role';
+import { authUserPage, grant, revoke, addUser, removeUser } from '@/api/admin/role';
 
 export default {
   name: 'AuthUser',
@@ -89,16 +89,15 @@ export default {
     };
   },
   methods: {
-    grant(index, row) {
+    addUser(index, row) {
       this.$confirm('该角色将授权给用户名:【' + row.agentId + '】,姓名:【' + row.name + '】的用户，请确认!', '授权角色', {
         type: 'warning'
       }).then(() => {
         const params = {
           roleId: this.roleId,
-          relType: 2,
-          relId: row.id
+          userId: row.id
         };
-        grant(params).then(response => {
+        addUser(params).then(response => {
           const result = response.data;
           let title, type, text;
           if (result.code === 0) {
@@ -118,7 +117,7 @@ export default {
         });
       }).catch(() => {});
     },
-    revoke(index, row) {
+    removeUser(index, row) {
       this.$confirm(
         '将操作将取消用户名:【' + row.agentId + '】,姓名:【' + row.name + '】的用户的角色权限，请确认!',
         '取消授权', {
@@ -126,10 +125,9 @@ export default {
         }).then(() => {
         const params = {
           roleId: this.roleId,
-          relType: 2,
-          relId: row.id
+          userId: row.id
         };
-        revoke(params).then(response => {
+        removeUser(params).then(response => {
           const result = response.data;
           let title, type, text;
           if (result.code === 0) {
