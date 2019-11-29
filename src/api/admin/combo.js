@@ -2,12 +2,12 @@ import request from '@/utils/request'
 /**
  * 获取系统列表
  */
-export const getSystemType = () => {
-  return request({
-    url: '/admin/combo/systemType',
-    method: 'post'
-  })
-}
+// export const getSystemType = () => {
+//   return request({
+//     url: '/admin/combo/systemType',
+//     method: 'post'
+//   })
+// }
 
 /**
  * 获取权限类型

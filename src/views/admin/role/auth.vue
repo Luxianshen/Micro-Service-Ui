@@ -10,10 +10,10 @@
             <AuthUserTable :role-id="$route.params.id" />
           </el-tab-pane>
           <el-tab-pane label="菜单" icon="md-menu">
-            <AuthPermissionTree :role-id="$route.params.id" :type="0" />
+            <AuthMenuPermissionTree :role-id="$route.params.id" :type="0" />
           </el-tab-pane>
           <el-tab-pane label="接口" icon="md-aperture">
-            <AuthPermissionTree :role-id="$route.params.id" :type="1" />
+            <AuthApiPermissionTree :role-id="$route.params.id" :type="1" />
           </el-tab-pane>
           <!-- <el-tab-pane label="功能" icon="md-apps">
             <AuthPermissionTree :role-id="$route.params.id" :type="2" />
@@ -26,12 +26,14 @@
 <script>
 import { get } from '@/api/admin/role';
 import AuthUserTable from '@/components/admin/role-auth-user';
-import AuthPermissionTree from '@/components/admin/role-auth-permission';
+import AuthMenuPermissionTree from '@/components/admin/role-auth-permission';
+import AuthApiPermissionTree from '@/components/admin/role-auth-api';
 
 export default {
   components: {
     AuthUserTable,
-    AuthPermissionTree
+    AuthMenuPermissionTree,
+    AuthApiPermissionTree
   },
   data() {
     return {

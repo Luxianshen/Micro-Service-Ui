@@ -17,7 +17,7 @@
   </el-card>
 </template>
 <script>
-import { grant, revoke, findAuthPermissionTree } from '@/api/admin/role'
+import { grantApi, revokeApi, findAuthPermissionTree } from '@/api/admin/role'
 
 export default {
   name: 'AuthPermission',
@@ -63,10 +63,10 @@ export default {
     auth (data) {
       const params = {
         roleId: this.roleId,
-        menuId: data.id
+        apiId: data.id
       }
       if (!data.checked) {
-        grant(params).then(response => {
+        grantApi(params).then(response => {
           const result = response.data
           if (result.code === 0) {
             this.$notify({
@@ -83,7 +83,7 @@ export default {
           }
         })
       } else {
-        revoke(params).then(response => {
+        revokeApi(params).then(response => {
           const result = response.data
           if (result.code === 0) {
             this.$notify({

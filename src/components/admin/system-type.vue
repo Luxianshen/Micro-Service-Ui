@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import { getSystemType } from '@/api/admin/combo';
+// import { getSystemType } from '@/api/admin/combo';
 
 export default {
   name: 'SystemType',
@@ -50,14 +50,14 @@ export default {
     })
   },
   methods: {
-    initCombo() {
-      getSystemType().then(response => {
-        const result = response.data;
-        if (result.code === 0) {
-          this.types = result.data;
-        }
-      });
-    },
+    // initCombo() {
+    //   getSystemType().then(response => {
+    //     const result = response.data;
+    //     if (result.code === 0) {
+    //       this.types = result.data;
+    //     }
+    //   });
+    // },
     setCurrentValue(val) {
       this.currentValue = val;
       this.$emit('input', val);

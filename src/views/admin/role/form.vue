@@ -19,7 +19,7 @@
     <el-form-item label="角色编码" prop="roleCode">
       <el-input v-model="formData.roleCode" type="text" placeholder="请输入角色编码，如：base:admin:super" />
     </el-form-item>
-    <el-form-item label="默认角色" prop="defaultRole">
+    <el-form-item label="系统角色" prop="defaultRole">
       <el-radio-group v-model="formData.defaultRole">
         <el-radio :label="1">是</el-radio>
         <el-radio :label="0">否</el-radio>

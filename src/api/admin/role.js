@@ -1,6 +1,7 @@
 import request from '@/router/axios'
 
 const BasicUrl = '/api/v1/auth/role/'
+const BasicApiUrl = '/api/transmit/api/'
 
 /**
  * 保存信息
@@ -121,6 +122,30 @@ export const grant = params => {
 export const revoke = params => {
   return request({
     url: BasicUrl + 'revoke',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 授权接口给角色
+ * @param {*} params
+ */
+export const grantApi = params => {
+  return request({
+    url: BasicApiUrl + 'grant',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 取消角色接口
+ * @param {*} params
+ */
+export const revokeApi = params => {
+  return request({
+    url: BasicApiUrl + 'revoke',
     data: params,
     method: 'post'
   })

@@ -6,14 +6,11 @@
       :search-form="searchForm"
     >
       <template slot="search">
-        <el-form-item prop="sysId">
-          <SystemType v-model="searchForm.sysId" :show-desc="false" placeholder="所属系统" />
+        <el-form-item prop="title">
+          <el-input v-model="searchForm.name" type="text" placeholder="接口名称" />
         </el-form-item>
-        <el-form-item prop="roleName">
-          <el-input v-model="searchForm.roleName" type="text" placeholder="角色名称" />
-        </el-form-item>
-        <el-form-item prop="roleCode">
-          <el-input v-model="searchForm.roleCode" type="text" placeholder="角色编码" />
+        <el-form-item prop="permissionCode">
+          <el-input v-model="searchForm.permissionCode" type="text" placeholder="权限编码" />
         </el-form-item>
       </template>
       <template slot="function">
@@ -21,26 +18,18 @@
       </template>
       <template slot="tableColumns">
         <el-table-column prop="id" label="ID" :show-overflow-tooltip="true" />
-        <el-table-column prop="roleName" label="名称" />
-        <el-table-column prop="roleCode" label="编码" />
-        <el-table-column prop="defaultRole" label="系统角色">
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.defaultRole === 1 ? 'success' : 'danger'">
-              {{ scope.row.defaultRole === 1 ? '是' : '否' }}
-            </el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column prop="roleDesc" label="简介" />
-        <el-table-column prop="createTime" label="创建时间" />
+        <el-table-column prop="sysId" label="系统" />
+        <el-table-column prop="name" label="名称" />
+        <el-table-column prop="apiKey" label="请求key" />
+        <el-table-column prop="permissionCode" label="权限编码" />
+        <el-table-column prop="realUrl" label="真实路劲" />
+        <el-table-column prop="reqType" label="请求类型" />
+        <el-table-column prop="state" label="接口状态" />
+        <el-table-column prop="seq" label="排序" />
+        <el-table-column prop="apiDesc" label="接口描述" />
         <el-table-column prop="action" label="操作">
           <template slot-scope="scope">
             <el-button-group>
-              <el-button
-                type="warning"
-                icon="el-icon-setting"
-                circle
-                @click.native.prevent="auth(scope.$index, scope.row)"
-              />
               <el-button
                 type="primary"
                 icon="el-icon-edit"
@@ -62,7 +51,7 @@
       :title="customFormInitOption.title"
       :visible.sync="customFormInitOption.showModal"
     >
-      <RoleForm
+      <TransmitForm
         ref="customForm"
         :action="customFormInitOption.action"
       />
@@ -76,23 +65,21 @@
 
 <script>
 import DataTable from '@/components/datatable/data-table';
-import RoleForm from '@/views/admin/role/form';
-import SystemType from '@/components/admin/system-type';
-import { page, remove } from '@/api/admin/role';
+import TransmitForm from '@/views/admin/transmit/form';
+import { remove, page } from '@/api/admin/transmit';
 
 export default {
   components: {
     DataTable,
-    RoleForm,
-    SystemType
+    TransmitForm
   },
   data() {
     return {
       page: page,
       searchForm: {
         sysId: null,
-        roleName: null,
-        roleCode: null
+        name: null,
+        permissionCode: null
       },
       customFormInitOption: {
         title: '',
@@ -104,13 +91,13 @@ export default {
   },
   methods: {
     handleAdd() {
-      this.customFormInitOption.title = '新增';
+      this.customFormInitOption.title = '新增权限';
       this.customFormInitOption.action = 'add';
       this.customFormInitOption.showModal = true;
       this.reset();
     },
     edit(index, row) {
-      this.customFormInitOption.title = '编辑';
+      this.customFormInitOption.title = '编辑权限';
       this.customFormInitOption.action = 'edit';
       this.customFormInitOption.showModal = true;
       this.customFormInitOption.id = row.id;
@@ -119,23 +106,21 @@ export default {
       });
     },
     remove(index, row) {
-      this.$confirm('将删除名称为【' + row.roleName + '】的角色？会同时清除对应的授权信息.', '请确认', {
+      this.$confirm('将删除编码为【' + row.permissionCode + '】的权限信息,授权信息也将一并清除.', '请确认', {
         type: 'warning'
       }).then(() => {
         remove(row.id).then(response => {
           const result = response.data;
-          let title, type, text;
+          let title, type;
           if (result.code === 0) {
             title = '成功';
             type = 'success';
           } else {
             title = result.code;
-            text = result.msg;
-            type = 'error';
+            type = 'danger';
           }
           this.$notify({
             title: title,
-            message: text,
             type: type
           });
           this.$refs.customTable.query();
@@ -150,11 +135,37 @@ export default {
         this.$refs.customForm.reset();
       });
     },
-    auth(index, row) {
-      const path = '/admin/role/auth/' + row.id;
-      this.$router.replace({
-        path: path
-      });
+    getPermissionTypeText(cellValue) {
+      let text = '其他';
+      switch (cellValue) {
+        case 0:
+          text = '菜单';
+          break;
+        case 1:
+          text = '资源';
+          break;
+        case 2:
+          text = '功能';
+          break;
+        default:
+      }
+      return text;
+    },
+    getPermissionTypeColor(cellValue) {
+      let type = 'danger';
+      switch (cellValue) {
+        case 0:
+          type = 'success';
+          break;
+        case 1:
+          type = 'info';
+          break;
+        case 2:
+          type = 'warning';
+          break;
+        default:
+      }
+      return type;
     }
   }
 };
