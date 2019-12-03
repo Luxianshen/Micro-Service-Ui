@@ -1,6 +1,6 @@
 import request from '@/router/axios'
 
-const BasicUrl = '/api/v1/auth/menu/'
+const BasicUrl = '/api/v1/menu/'
 
 /**
  * 保存权限信息

@@ -1,6 +1,6 @@
 import request from '@/router/axios'
 
-const BasicUrl = '/api/v1/auth/role/'
+const BasicUrl = '/api/v1/role/'
 const BasicApiUrl = '/api/transmit/api/'
 
 /**
@@ -158,6 +158,30 @@ export const revokeApi = params => {
 export const findAuthPermissionTree = params => {
   return request({
     url: BasicUrl + 'findAuthPermissionTree',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 接口分页
+ * @param {*} page
+ */
+export const apiPage = page => {
+  return request({
+    url: BasicApiUrl + 'page',
+    data: page,
+    method: 'post'
+  })
+}
+
+/**
+ * 获取权限树
+ * @param {*} params
+ */
+export const findClientPermissionTree = params => {
+  return request({
+    url: BasicApiUrl + 'findClientPermissionTree',
     data: params,
     method: 'post'
   })
