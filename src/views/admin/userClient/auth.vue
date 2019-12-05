@@ -5,7 +5,7 @@
       <p>
         <el-tabs tab-position="left" type="card">
           <el-tab-pane label="接口" icon="md-aperture">
-            <AuthApiPermissionTree :agent-id="$route.params.id" :type="1" />
+            <AuthApiPermissionTree :client-id="$route.params.id" :agent-id="userClientInfo.agentId" />
           </el-tab-pane>
         </el-tabs>
       </p>
@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     getCilentInfo() {
-      const agentId = this.$route.params.id;
-      get(agentId).then(response => {
+      const clientId = this.$route.params.id;
+      get(clientId).then(response => {
         const result = response.data;
         if (result.code === 0) {
           this.userClientInfo = result.data;

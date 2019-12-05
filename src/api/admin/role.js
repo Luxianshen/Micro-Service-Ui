@@ -2,6 +2,7 @@ import request from '@/router/axios'
 
 const BasicUrl = '/api/v1/role/'
 const BasicApiUrl = '/api/transmit/api/'
+const BasicTransmitUrl = '/api/transmit/'
 
 /**
  * 保存信息
@@ -182,6 +183,30 @@ export const apiPage = page => {
 export const findClientPermissionTree = params => {
   return request({
     url: BasicApiUrl + 'findClientPermissionTree',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 授权接口给角色
+ * @param {*} params
+ */
+export const grantClient = params => {
+  return request({
+    url: BasicTransmitUrl + 'grant',
+    data: params,
+    method: 'post'
+  })
+}
+
+/**
+ * 取消角色接口
+ * @param {*} params
+ */
+export const revokeClient = params => {
+  return request({
+    url: BasicTransmitUrl + 'revoke',
     data: params,
     method: 'post'
   })

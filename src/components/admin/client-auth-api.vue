@@ -17,17 +17,17 @@
   </el-card>
 </template>
 <script>
-import { grantApi, revokeApi, findClientPermissionTree } from '@/api/admin/role'
+import { grantClient, revokeClient, findClientPermissionTree } from '@/api/admin/role'
 
 export default {
   name: 'AuthPermission',
   props: {
-    agentId: {
+    clientId: {
       type: String,
       required: true
     },
-    type: {
-      type: Number,
+    agentId: {
+      type: String,
       required: true
     }
   },
@@ -45,7 +45,7 @@ export default {
   methods: {
     initTree() {
       const params = {
-        id: this.agentId
+        id: this.clientId
       }
       findClientPermissionTree(params).then(response => {
         const result = response.data
@@ -61,11 +61,12 @@ export default {
     },
     auth (data) {
       const params = {
+        clientId: this.clientId,
         agentId: this.agentId,
         apiId: data.id
       }
       if (!data.checked) {
-        grantApi(params).then(response => {
+        grantClient(params).then(response => {
           const result = response.data
           if (result.code === 0) {
             this.$notify({
@@ -82,7 +83,7 @@ export default {
           }
         })
       } else {
-        revokeApi(params).then(response => {
+        revokeClient(params).then(response => {
           const result = response.data
           if (result.code === 0) {
             this.$notify({
