@@ -83,7 +83,6 @@ export default {
   login: {
     title: '欢迎使用demo管理系统',
     logIn: '登录',
-    tenantCode: '单位ID',
     identifier: '账号',
     credential: '密码',
     password: '密码',
@@ -250,12 +249,6 @@ export default {
       sort: '排序',
       status: '状态',
       refresh: '刷新路由'
-    },
-    tenant: {
-      tenantCode: '单位标识',
-      tenantName: '单位名称',
-      tenantDesc: '单位描述',
-      status: '状态'
     }
   },
   excel: {

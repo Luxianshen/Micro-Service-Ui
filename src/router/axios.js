@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '../store'
-import { getToken, setToken, getRefreshToken, getTenantCode } from '@/utils/auth'
+import { getToken, setToken, getRefreshToken } from '@/utils/auth'
 import { isNotEmpty } from '@/utils/util'
 import { refreshToken } from '@/api/admin/login'
 import { Message } from 'element-ui'
@@ -25,11 +25,6 @@ axios.interceptors.request.use(config => {
       config.headers['Authorization'] = getToken() // 让每个请求携带token
     }
   }
-  // 增加租户编号请求头
-  const tenantCode = config.headers['Tenant-Code']
-  if (tenantCode === undefined) {
-    config.headers['Tenant-Code'] = getTenantCode()
-  }
   // transform form data as json string
   config.transformRequest = [function (data) {
     const requestBody = JSON.stringify({
@@ -50,6 +45,7 @@ axios.interceptors.response.use(data => {
   return data
 }, error => {
   NProgress.done()
+  debugger
   if (error.response) {
     const originalRequest = error.config
     const currentRefreshToken = getRefreshToken()
@@ -59,20 +55,9 @@ axios.interceptors.response.use(data => {
       if (originalRequest.url.indexOf('removeToken') !== -1) {
         return
       }
-      return refreshToken().then(response => {
-        // 保存新的token
-        setToken(response.data.access_token)
-        store.commit('SET_ACCESS_TOKEN', response.data.access_token)
-        // 带上新的token
-        originalRequest.headers['Authorization'] = 'Bearer ' + response.data.access_token
-        // 重新请求
-        return axios(originalRequest)
-      }).catch(() => {
-        // 刷新失败，执行退出
-        store.dispatch('LogOut').then(() => location.reload())
-      })
-    } else if (error.response.status === 423) {
-      Message({ message: '演示环境不能操作', type: 'warning' })
+    } else if (error.response.data.message === 'TOKEN过期') {
+      // 刷新失败，执行退出
+      store.dispatch('LogOut').then(() => location.reload())
     } else {
       // 其它错误则弹出提示
       const { code, data } = error.response.data

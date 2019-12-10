@@ -23,7 +23,3 @@ export function setRefreshToken (token) {
 export function removeRefreshToken () {
   return removeStore({ name: 'refresh_token' })
 }
-
-export function getTenantCode () {
-  return getStore({ name: 'tenantCode' })
-}

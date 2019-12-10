@@ -22,7 +22,6 @@ const getters = {
   menu: state => state.user.menu,
   isCollapse: state => state.common.isCollapse,
   sysConfig: state => state.sysConfig.sysConfig,
-  tenantCode: state => state.user.tenantCode,
   userInfo: state => state.user.userInfo
 }
 export default getters

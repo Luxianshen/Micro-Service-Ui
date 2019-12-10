@@ -3,9 +3,6 @@
     <div class="login-wrap animated flipInY">
       <h3>{{ $t('login.title') }}</h3>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-        <!-- <el-form-item prop="tenantCode">
-          <el-input :placeholder="$t('login.tenantCode')" v-model="loginForm.tenantCode" name="tenantCode" type="text" auto-complete="on"/>
-        </el-form-item> -->
         <el-form-item prop="identifier">
           <el-input :placeholder="$t('login.identifier')" v-model="loginForm.identifier" name="identifier" type="text" auto-complete="on"/>
         </el-form-item>
@@ -82,7 +79,6 @@ export default {
         type: 'image'
       },
       loginRules: {
-        // tenantCode: [{ required: true, trigger: 'blur', message: '请输入单位ID' }],
         identifier: [{ required: true, trigger: 'blur', message: '请输入账号' }],
         credential: [
           { required: true, trigger: 'blur', message: '请输入密码' },
