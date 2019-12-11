@@ -28,6 +28,7 @@ export default {
         initMenu(this.$router, data)
       })
     }
+    console.log(this.menu,'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
   },
   computed: {
     ...mapGetters(['menu', 'tag', 'isCollapse']),

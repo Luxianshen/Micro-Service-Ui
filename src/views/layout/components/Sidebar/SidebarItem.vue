@@ -1,21 +1,21 @@
 <template>
   <div class="menu-wrapper">
     <template v-for="(item, index) in menu">
-      <el-menu-item v-if="item.children.length===0 " :index="filterPath(item.path,index)" :key="item.label" @click="open(item)">
+      <el-menu-item v-if="item.children.length === 0" :index="filterPath(item.path,index)" :key="item.label" @click="open(item)" >
         <svg-icon :icon-class="item.icon" />
         <span slot="title">{{ item.label }}</span>
       </el-menu-item>
 
-      <el-submenu v-else :index="filterPath(item.label,index)" :key="item.label">
+      <el-submenu v-else :index="filterPath(item.label,index)" :key="item.label" v-show="item.hidden !== 1">
         <template slot="title">
           <svg-icon :icon-class="item.icon" />
           <span slot="title" :class="{'el-menu--display':isCollapse}">{{ item.label }}</span>
         </template>
         <template v-for="(child,cindex) in item.children">
-          <el-menu-item v-if="child.children.length==0" :index="filterPath(child.path,cindex)" :key="cindex" @click="open(child)">
+          <el-menu-item  v-if="child.children.length==0 && child.hidden !== 1" :index="filterPath(child.path,cindex)" :key="cindex" @click="open(child)" >
             <span slot="title">{{ child.label }}</span>
           </el-menu-item>
-          <sidebar-item v-else :menu="[child]" :key="cindex" :is-collapse="isCollapse"/>
+          <sidebar-item v-show="child.hidden !== 1" v-else :menu="[child]" :key="cindex" :is-collapse="isCollapse"/>
         </template>
       </el-submenu>
     </template>

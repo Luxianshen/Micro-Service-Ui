@@ -37,9 +37,9 @@ export default {
       zoom: 100
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
-      this.initTree()
+      this.initTree ()
     })
   },
   methods: {

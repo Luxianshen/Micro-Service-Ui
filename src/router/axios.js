@@ -1,8 +1,7 @@
 import axios from 'axios'
 import store from '../store'
-import { getToken, setToken, getRefreshToken } from '@/utils/auth'
+import { getToken, getRefreshToken } from '@/utils/auth'
 import { isNotEmpty } from '@/utils/util'
-import { refreshToken } from '@/api/admin/login'
 import { Message } from 'element-ui'
 import errorCode from '@/const/errorCode'
 import NProgress from 'nprogress' // progress bar
@@ -45,7 +44,6 @@ axios.interceptors.response.use(data => {
   return data
 }, error => {
   NProgress.done()
-  debugger
   if (error.response) {
     const originalRequest = error.config
     const currentRefreshToken = getRefreshToken()

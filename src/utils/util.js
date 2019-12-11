@@ -43,7 +43,6 @@ export const initMenu = (router, menu) => {
 }
 
 export const formatRoutes = (aMenu) => {
-  debugger
   const aRouter = []
   aMenu.forEach(oMenu => {
     const {
@@ -71,7 +70,8 @@ export const formatRoutes = (aMenu) => {
         icon: icon,
         redirect: redirect,
         children: validatenull(children) ? [] : formatRoutes(children),
-        title: name
+        title: name,
+        hidden: true
       }
       aRouter.push(oRouter)
     }
