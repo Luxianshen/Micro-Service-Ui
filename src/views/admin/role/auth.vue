@@ -24,10 +24,10 @@
   </div>
 </template>
 <script>
-import { get } from '@/api/admin/role';
-import AuthUserTable from '@/components/admin/role-auth-user';
-import AuthMenuPermissionTree from '@/components/admin/role-auth-permission';
-import AuthApiPermissionTree from '@/components/admin/role-auth-api';
+import { get } from '@/api/admin/role'
+import AuthUserTable from '@/components/admin/role-auth-user'
+import AuthMenuPermissionTree from '@/components/admin/role-auth-permission'
+import AuthApiPermissionTree from '@/components/admin/role-auth-api'
 
 export default {
   components: {
@@ -35,7 +35,7 @@ export default {
     AuthMenuPermissionTree,
     AuthApiPermissionTree
   },
-  data() {
+  data () {
     return {
       roleInfo: {
         id: null,
@@ -43,28 +43,28 @@ export default {
         roleCode: null,
         roleDesc: null
       }
-    };
+    }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
-      this.getRoleInfo();
-    });
+      this.getRoleInfo()
+    })
   },
   methods: {
-    getRoleInfo() {
-      const roleId = this.$route.params.id;
+    getRoleInfo () {
+      const roleId = this.$route.params.id
       get(roleId).then(response => {
-        const result = response.data;
+        const result = response.data
         if (result.code === 0) {
-          this.roleInfo = result.data;
+          this.roleInfo = result.data
         } else {
           this.$notify.error({
             title: result.code,
             message: result.msg
-          });
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>

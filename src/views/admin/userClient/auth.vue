@@ -13,41 +13,41 @@
   </div>
 </template>
 <script>
-import { get } from '@/api/admin/userClient';
-import AuthApiPermissionTree from '@/components/admin/client-auth-api';
+import { get } from '@/api/admin/userClient'
+import AuthApiPermissionTree from '@/components/admin/client-auth-api'
 
 export default {
   components: {
     AuthApiPermissionTree
   },
-  data() {
+  data () {
     return {
       userClientInfo: {
         id: null,
         agentId: null
       }
-    };
+    }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
-      this.getCilentInfo();
-    });
+      this.getCilentInfo()
+    })
   },
   methods: {
-    getCilentInfo() {
-      const clientId = this.$route.params.id;
+    getCilentInfo () {
+      const clientId = this.$route.params.id
       get(clientId).then(response => {
-        const result = response.data;
+        const result = response.data
         if (result.code === 0) {
-          this.userClientInfo = result.data;
+          this.userClientInfo = result.data
         } else {
           this.$notify.error({
             title: result.code,
             message: result.msg
-          });
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>

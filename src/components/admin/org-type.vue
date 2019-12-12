@@ -1,11 +1,6 @@
 <template>
   <div>
-    <el-select
-      :value="currentValue"
-      :clearable="true"
-      style="width: 100%;"
-      @change="setCurrentValue"
-    >
+    <el-select :value="currentValue" :clearable="true" style="width: 100%;" @change="setCurrentValue">
       <el-option v-for="item in types" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
   </div>
@@ -21,24 +16,24 @@ export default {
       default: null
     }
   },
-  data() {
+  data () {
     return {
       types: [],
       currentValue: null
     }
   },
   watch: {
-    value(val) {
+    value (val) {
       this.setCurrentValue(val)
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
       this.initCombo()
     })
   },
   methods: {
-    initCombo() {
+    initCombo () {
       getOrgType().then(response => {
         const result = response.data
         if (result.code === 0) {
@@ -46,7 +41,7 @@ export default {
         }
       })
     },
-    setCurrentValue(val) {
+    setCurrentValue (val) {
       this.currentValue = val
       this.$emit('input', val)
     }

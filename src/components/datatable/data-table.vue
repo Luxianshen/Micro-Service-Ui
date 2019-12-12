@@ -11,16 +11,8 @@
       </div>
       <el-row type="flex" justify="center">
         <el-col :span="24">
-          <el-table
-            v-loading="loading"
-            :data="tableData"
-            :border="border"
-            fit
-            highlight-current-row
-            :show-header="showHeader"
-            :size="tableSize"
-            @on-sort-change="sortTable"
-          >
+          <el-table v-loading="loading" :data="tableData" :border="border" fit highlight-current-row
+            :show-header="showHeader" :size="tableSize" @on-sort-change="sortTable">
             <slot name="tableColumns" />
           </el-table>
         </el-col>
@@ -28,13 +20,8 @@
       <el-row type="flex" justify="center" class="pagination">
         <el-col :span="24">
           <div style="float: right;">
-            <pagination
-              v-show="total>0"
-              :total="total"
-              :page.sync="current"
-              :limit.sync="pageSize"
-              @pagination="pageChange"
-            />
+            <pagination v-show="total>0" :total="total" :page.sync="current" :limit.sync="pageSize"
+              @pagination="pageChange" />
           </div>
         </el-col>
       </el-row>
@@ -43,7 +30,7 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Datatable',
@@ -53,7 +40,7 @@ export default {
   props: {
     request: {
       type: Function,
-      default: function() {
+      default: function () {
       }
     },
     stripe: {
@@ -75,11 +62,11 @@ export default {
     searchForm: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     }
   },
-  data() {
+  data () {
     return {
       tableData: [],
       loading: true,
@@ -87,84 +74,84 @@ export default {
       pageSize: 10,
       current: 1,
       total: 0
-    };
+    }
   },
   computed: {
     // dynamic pagination query params
-    params: function() {
-      const params = {};
-      params.size = this.pageSize;
-      params.current = this.current;
-      params.params = this.searchForm;
-      return params;
+    params: function () {
+      const params = {}
+      params.size = this.pageSize
+      params.current = this.current
+      params.params = this.searchForm
+      return params
     },
-    hasSearch() {
-      return !!this.$slots.search;
+    hasSearch () {
+      return !!this.$slots.search
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
-      this.loadData();
-    });
+      this.loadData()
+    })
   },
   methods: {
     // load remote data
-    loadData() {
-      this.loading = true;
+    loadData () {
+      this.loading = true
 
       this.request(this.params)
         .then(res => {
-          this.loading = false;
-          const result = res.data;
+          this.loading = false
+          const result = res.data
           if (result.code === 0) {
-            this.tableData = result.data.records;
-            this.total = result.data.total;
+            this.tableData = result.data.records
+            this.total = result.data.total
           } else {
             this.$notify.error({
               title: result.code,
               message: result.msg
-            });
+            })
           }
         })
         .catch(err => {
-          this.loading = false;
+          this.loading = false
           this.$notify.error({
             title: '出错啦',
             message: err
-          });
-          console.log(err);
-        });
+          })
+          console.log(err)
+        })
     },
     //
-    query() {
-      this.current = 1;
-      this.total = 0;
-      this.loadData();
+    query () {
+      this.current = 1
+      this.total = 0
+      this.loadData()
     },
-    reset() {
-      this.$refs.tableSearchForm.resetFields();
+    reset () {
+      this.$refs.tableSearchForm.resetFields()
       if (typeof this.$parent.resetTableSearchForm === 'function') {
-        this.$parent.resetTableSearchForm();
+        this.$parent.resetTableSearchForm()
       }
-      this.$message('查询条件已重置');
+      this.$message('查询条件已重置')
     },
     // change page size
-    sizeChange(pageSize) {
-      this.pageSize = pageSize;
-      this.loadData();
+    sizeChange (pageSize) {
+      this.pageSize = pageSize
+      this.loadData()
     },
     // change current page
-    pageChange(current) {
-      this.current = current.page;
-      this.pageSize = current.limit;
-      this.loadData();
+    pageChange (current) {
+      this.current = current.page
+      this.pageSize = current.limit
+      this.loadData()
     },
     // handle sort
-    sortTable(column, key, order) {
-      console.log(column, key, order);
+    sortTable (column, key, order) {
+      console.log(column, key, order)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

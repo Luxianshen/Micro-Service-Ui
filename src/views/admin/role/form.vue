@@ -1,17 +1,12 @@
 <template>
-  <el-form
-    ref="roleForm"
-    :model="formData"
-    :rules="formRules"
-    label-width="90px"
-  >
+  <el-form ref="roleForm" :model="formData" :rules="formRules" label-width="90px">
     <el-form-item v-if="action === 'edit'" prop="id">
       <input v-model="formData.id" type="hidden">
     </el-form-item>
     <el-form-item label="所属系统" prop="sysId">
-        <el-select v-model="formData.sysId" class="filter-item" placeholder="请选择系统">
-            <el-option v-for="item in sysOptions" :key="item" :label="item | sysFilter" :value="item"/>
-        </el-select>
+      <el-select v-model="formData.sysId" class="filter-item" placeholder="请选择系统">
+        <el-option v-for="item in sysOptions" :key="item" :label="item | sysFilter" :value="item" />
+      </el-select>
     </el-form-item>
     <el-form-item label="名称" prop="roleName">
       <el-input v-model="formData.roleName" type="text" placeholder="请输入名称" />
@@ -26,13 +21,13 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="描述" prop="roleDesc">
-      <el-input v-model="formData.roleDesc" type="textarea" :autosize="{ minRows: 3}" placeholder="请输入简介" :maxlength="255" />
+      <el-input v-model="formData.roleDesc" type="textarea" :autosize="{ minRows: 3}" placeholder="请输入简介"
+        :maxlength="255" />
     </el-form-item>
   </el-form>
 </template>
 <script>
-import { get, save, update } from '@/api/admin/role';
-import SystemType from '@/components/admin/system-type';
+import { get, save, update } from '@/api/admin/role'
 
 export default {
   name: 'RoleForm',
@@ -53,9 +48,9 @@ export default {
       default: 'add'
     }
   },
-  data() {
+  data () {
     return {
-      sysOptions: ['0', '1','2'],
+      sysOptions: ['0', '1', '2'],
       formRules: {
         sysId: [
           { required: true, message: '所属系统不能为空' }
@@ -75,57 +70,57 @@ export default {
         defaultRole: 0,
         roleDesc: ''
       }
-    };
+    }
   },
   methods: {
-    getInfo(id) {
+    getInfo (id) {
       get(id).then(response => {
         if (response.data.code === 0) {
-          this.formData = response.data.data;
+          this.formData = response.data.data
         } else {
           this.$notify.error({
             title: response.data.code,
             message: response.data.msg
-          });
+          })
         }
-      });
+      })
     },
-    handleSubmit() {
+    handleSubmit () {
       this.$refs.roleForm.validate((valid) => {
         if (valid) {
           if (this.action === 'add') {
             save(this.formData).then(response => {
-              this.handleResult(response.data);
-            });
+              this.handleResult(response.data)
+            })
           } else if (this.action === 'edit') {
             update(this.formData).then(response => {
-              this.handleResult(response.data);
-            });
+              this.handleResult(response.data)
+            })
           }
         }
-      });
+      })
     },
-    handleResult(obj) {
+    handleResult (obj) {
       if (obj.code === 0) {
         this.$notify({
           title: '提示',
           message: obj.msg,
           type: 'success'
-        });
-        this.$parent.$parent.customFormInitOption.showModal = false;
-        this.reset();
-        this.$parent.$parent.$refs.customTable.query();
+        })
+        this.$parent.$parent.customFormInitOption.showModal = false
+        this.reset()
+        this.$parent.$parent.$refs.customTable.query()
       } else {
         this.$notify({
           title: '提示',
           message: obj.msg,
           type: 'error'
-        });
+        })
       }
     },
-    reset() {
-      this.$refs.roleForm.resetFields();
+    reset () {
+      this.$refs.roleForm.resetFields()
     }
   }
-};
+}
 </script>

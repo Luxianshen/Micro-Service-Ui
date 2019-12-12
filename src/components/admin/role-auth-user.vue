@@ -1,10 +1,6 @@
 <template>
   <div>
-    <data-table
-      ref="userTable"
-      :request="userPage"
-      :search-form="searchForm"
-    >
+    <data-table ref="userTable" :request="userPage" :search-form="searchForm">
       <template slot="search">
         <el-form-item prop="agentId">
           <el-input v-model="searchForm.agentId" type="text" placeholder="帐号" />
@@ -48,12 +44,9 @@
         <el-table-column prop="action" label="操作">
           <template slot-scope="scope">
             <el-button-group>
-              <el-button
-                :type="scope.row.checked !== true ? 'success' : 'warning'"
-                :icon="scope.row.checked !== true ? 'el-icon-setting' : 'el-icon-delete'"
-                circle
-                @click.native.prevent="scope.row.checked !== true ? addUser(scope.$index, scope.row) : removeUser(scope.$index, scope.row)"
-              />
+              <el-button :type="scope.row.checked !== true ? 'success' : 'warning'"
+                :icon="scope.row.checked !== true ? 'el-icon-setting' : 'el-icon-delete'" circle
+                @click.native.prevent="scope.row.checked !== true ? addUser(scope.$index, scope.row) : removeUser(scope.$index, scope.row)" />
             </el-button-group>
           </template>
         </el-table-column>
@@ -62,8 +55,8 @@
   </div>
 </template>
 <script>
-import DataTable from '@/components/datatable/data-table';
-import { authUserPage, grant, revoke, addUser, removeUser } from '@/api/admin/role';
+import DataTable from '@/components/datatable/data-table'
+import { authUserPage, addUser, removeUser } from '@/api/admin/role'
 
 export default {
   name: 'AuthUser',
@@ -76,7 +69,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       userPage: authUserPage,
       searchForm: {
@@ -86,38 +79,38 @@ export default {
         roleId: this.roleId,
         checked: null
       }
-    };
+    }
   },
   methods: {
-    addUser(index, row) {
+    addUser (index, row) {
       this.$confirm('该角色将授权给用户名:【' + row.agentId + '】,姓名:【' + row.name + '】的用户，请确认!', '授权角色', {
         type: 'warning'
       }).then(() => {
         const params = {
           roleId: this.roleId,
           userId: row.id
-        };
+        }
         addUser(params).then(response => {
-          const result = response.data;
-          let title, type, text;
+          const result = response.data
+          let title, type, text
           if (result.code === 0) {
-            title = '成功';
-            type = 'success';
-            this.$refs.userTable.query();
+            title = '成功'
+            type = 'success'
+            this.$refs.userTable.query()
           } else {
-            title = result.code;
-            text = result.msg;
-            type = 'error';
+            title = result.code
+            text = result.msg
+            type = 'error'
           }
           this.$notify({
             title: title,
             message: text,
             type: type
-          });
-        });
-      }).catch(() => {});
+          })
+        })
+      }).catch(() => { })
     },
-    removeUser(index, row) {
+    removeUser (index, row) {
       this.$confirm(
         '将操作将取消用户名:【' + row.agentId + '】,姓名:【' + row.name + '】的用户的角色权限，请确认!',
         '取消授权', {
@@ -126,27 +119,27 @@ export default {
         const params = {
           roleId: this.roleId,
           userId: row.id
-        };
+        }
         removeUser(params).then(response => {
-          const result = response.data;
-          let title, type, text;
+          const result = response.data
+          let title, type, text
           if (result.code === 0) {
-            title = '成功';
-            type = 'success';
-            this.$refs.userTable.query();
+            title = '成功'
+            type = 'success'
+            this.$refs.userTable.query()
           } else {
-            title = result.code;
-            text = result.msg;
-            type = 'error';
+            title = result.code
+            text = result.msg
+            type = 'error'
           }
           this.$notify({
             title: title,
             message: text,
             type: type
-          });
-        });
-      }).catch(() => {});
+          })
+        })
+      }).catch(() => { })
     }
   }
-};
+}
 </script>

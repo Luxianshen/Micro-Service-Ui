@@ -1,15 +1,8 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
-    <el-menu
-      :show-timeout="200"
-      :default-active="$route.path"
-      :collapse="isCollapse"
-      mode="vertical"
-      background-color="#304156"
-      text-color="#bfcbd9"
-      active-text-color="#409EFF"
-    >
-      <sidebar-item :menu="menu" :is-collapse="isCollapse"/>
+    <el-menu :show-timeout="200" :default-active="$route.path" :collapse="isCollapse" mode="vertical"
+      background-color="#304156" text-color="#bfcbd9" active-text-color="#409EFF">
+      <sidebar-item :menu="menu" :is-collapse="isCollapse" />
     </el-menu>
   </el-scrollbar>
 </template>
@@ -28,7 +21,6 @@ export default {
         initMenu(this.$router, data)
       })
     }
-    console.log(this.menu,'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
   },
   computed: {
     ...mapGetters(['menu', 'tag', 'isCollapse']),

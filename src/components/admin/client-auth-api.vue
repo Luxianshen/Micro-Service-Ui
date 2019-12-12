@@ -6,14 +6,8 @@
         <el-tag type="danger">未授权</el-tag>
       </span>
     </div>
-    <v-org-tree
-      v-for="tree in permissionTree"
-      :key="tree.id"
-      :data="tree"
-      :node-render="nodeRender"
-      :horizontal="true"
-      @on-node-click="handleNodeClick"
-    />
+    <v-org-tree v-for="tree in permissionTree" :key="tree.id" :data="tree" :node-render="nodeRender" :horizontal="true"
+      @on-node-click="handleNodeClick" />
   </el-card>
 </template>
 <script>
@@ -31,19 +25,19 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       permissionTree: [],
       zoom: 100
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
       this.initTree()
     })
   },
   methods: {
-    initTree() {
+    initTree () {
       const params = {
         id: this.clientId
       }

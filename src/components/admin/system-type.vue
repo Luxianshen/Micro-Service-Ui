@@ -1,12 +1,7 @@
 <template>
   <div>
-    <el-select
-      :value="currentValue"
-      :clearable="true"
-      :placeholder="placeholder"
-      style="width: 100%;"
-      @change="setCurrentValue"
-    >
+    <el-select :value="currentValue" :clearable="true" :placeholder="placeholder" style="width: 100%;"
+      @change="setCurrentValue">
       <el-option v-for="item in types" :key="item.value" :label="item.label" :value="item.value">
         <span>{{ item.label }}</span>
         <span v-if="showDesc" style="float:right;color:#ccc">{{ item.desc }}</span>
@@ -33,18 +28,18 @@ export default {
       default: '请选择'
     }
   },
-  data() {
+  data () {
     return {
       types: [],
       currentValue: this.value
-    };
+    }
   },
   watch: {
-    value(val) {
+    value (val) {
       this.setCurrentValue(val)
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(() => {
       this.initCombo()
     })
@@ -58,10 +53,10 @@ export default {
     //     }
     //   });
     // },
-    setCurrentValue(val) {
-      this.currentValue = val;
-      this.$emit('input', val);
+    setCurrentValue (val) {
+      this.currentValue = val
+      this.$emit('input', val)
     }
   }
-};
+}
 </script>
