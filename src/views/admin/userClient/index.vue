@@ -3,18 +3,12 @@
     <data-table ref="customTable" :request="page" :search-form="searchForm">
       <template slot="search">
         <el-form-item prop="agentId">
-          <el-input v-model="searchForm.agentId" type="text" placeholder="帐号" />
-        </el-form-item>
-        <el-form-item prop="email">
-          <el-input v-model="searchForm.email" type="text" placeholder="邮箱" />
-        </el-form-item>
-        <el-form-item prop="name">
-          <el-input v-model="searchForm.name" type="text" placeholder="姓名" />
+          <el-input v-model="searchForm.agentId" type="text" placeholder="客户端ID" />
         </el-form-item>
         <el-form-item prop="state">
           <el-select v-model="searchForm.state" placeholder="状态">
             <el-option label="全部" value />
-            <el-option label="正常" :value="1" />
+            <el-option label="启用" :value="1" />
             <el-option label="禁用" :value="0" />
           </el-select>
         </el-form-item>

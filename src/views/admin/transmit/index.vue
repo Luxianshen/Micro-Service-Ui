@@ -5,8 +5,8 @@
         <el-form-item prop="title">
           <el-input v-model="searchForm.name" type="text" placeholder="接口名称" />
         </el-form-item>
-        <el-form-item prop="permissionCode">
-          <el-input v-model="searchForm.permissionCode" type="text" placeholder="权限编码" />
+        <el-form-item prop="apiKey">
+          <el-input v-model="searchForm.apiKey" type="text" placeholder="请求Key" />
         </el-form-item>
       </template>
       <template slot="function">
@@ -15,13 +15,28 @@
       </template>
       <template slot="tableColumns">
         <el-table-column prop="id" label="ID" :show-overflow-tooltip="true" />
-        <el-table-column prop="sysId" label="系统" />
+        <el-table-column prop="sysId" label="系统">
+          <template slot-scope="scope">
+            {{ scope.row.sysId === '0' ? '基础系统' : scope.row.sysId === '1' ? '内部系统' : '第三方系统' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="name" label="名称" />
         <el-table-column prop="apiKey" label="请求key" />
         <el-table-column prop="permissionCode" label="权限编码" />
         <el-table-column prop="realUrl" label="真实路劲" />
-        <el-table-column prop="reqType" label="请求类型" />
-        <el-table-column prop="state" label="接口状态" />
+        <el-table-column prop="reqType" label="请求类型">
+          <template slot-scope="scope">
+            <el-tag :type="getReqTypeColor(scope.row.reqType)" disable-transitions>
+              {{ getReqTypeText(scope.row.reqType) }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="state" label="接口状态">
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.state === '1' ? 'success' : 'danger'">
+              {{ scope.row.state === '1' ? '禁用' : '启用' }}
+            </el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="seq" label="排序" />
         <el-table-column prop="apiDesc" label="接口描述" />
         <el-table-column prop="action" label="操作">
@@ -118,32 +133,32 @@ export default {
         this.$refs.customForm.reset()
       })
     },
-    getPermissionTypeText (cellValue) {
-      let text = '其他'
+    getReqTypeText (cellValue) {
+      let text = 'DELETE'
       switch (cellValue) {
-        case 0:
-          text = '菜单'
+        case '0':
+          text = 'GET'
           break
-        case 1:
-          text = '资源'
+        case '1':
+          text = 'POST'
           break
-        case 2:
-          text = '功能'
+        case '2':
+          text = 'PUT'
           break
         default:
       }
       return text
     },
-    getPermissionTypeColor (cellValue) {
+    getReqTypeColor (cellValue) {
       let type = 'danger'
       switch (cellValue) {
-        case 0:
+        case '0':
           type = 'success'
           break
-        case 1:
+        case '1':
           type = 'info'
           break
-        case 2:
+        case '2':
           type = 'warning'
           break
         default:

@@ -8,8 +8,8 @@
         <!-- <el-form-item prop="type">
           <PermissionType v-model="searchForm.type" placeholder="权限类型" />
         </el-form-item> -->
-        <el-form-item prop="title">
-          <el-input v-model="searchForm.title" type="text" placeholder="权限名称" />
+        <el-form-item prop="name">
+          <el-input v-model="searchForm.name" type="text" placeholder="权限名称" />
         </el-form-item>
         <el-form-item prop="permissionCode">
           <el-input v-model="searchForm.permissionCode" type="text" placeholder="权限编码" />

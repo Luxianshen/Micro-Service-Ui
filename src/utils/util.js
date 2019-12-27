@@ -25,7 +25,8 @@ export const encryption = (params) => {
       var encrypted = CryptoJS.AES.encrypt(
         data,
         key,
-        { iv: iv,
+        {
+          iv: iv,
           mode: CryptoJS.mode.CBC,
           padding: CryptoJS.pad.ZeroPadding
         })
@@ -238,7 +239,7 @@ export const checkMultipleSelect = (multipleSelection, obj) => {
  * 设置浏览器头部标题
  */
 export const setTitle = function (title) {
-  title = title ? `${title}——系统演示` : '系统演示'
+  title = title ? `${title}—Joysim数据中台` : 'Joysim数据中台'
   window.document.title = title
 }
 

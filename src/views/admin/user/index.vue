@@ -5,11 +5,11 @@
         <el-form-item prop="agentId">
           <el-input v-model="searchForm.agentId" type="text" placeholder="帐号" />
         </el-form-item>
-        <el-form-item prop="email">
-          <el-input v-model="searchForm.email" type="text" placeholder="邮箱" />
-        </el-form-item>
         <el-form-item prop="name">
           <el-input v-model="searchForm.name" type="text" placeholder="姓名" />
+        </el-form-item>
+        <el-form-item prop="phoneNo">
+          <el-input v-model="searchForm.phoneNo" type="text" placeholder="电话号码" />
         </el-form-item>
         <el-form-item prop="state">
           <el-select v-model="searchForm.state" placeholder="状态">

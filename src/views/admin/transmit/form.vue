@@ -18,20 +18,17 @@
         <el-form-item label="名称" prop="name">
           <el-input v-model="formData.name" type="text" placeholder="请输入权限名称" />
         </el-form-item>
-        <el-form-item label="请求路劲" prop="apiKey">
-          <el-input v-model="formData.apiKey" type="text" placeholder="请输入请求路劲" />
+        <el-form-item label="接口Key" prop="apiKey">
+          <el-input v-model="formData.apiKey" type="text" placeholder="用于第三方调用" />
         </el-form-item>
-        <el-form-item label="真实路劲" prop="realUrl">
-          <el-input v-model="formData.realUrl" type="text" placeholder="请输入真实路劲" />
+        <el-form-item label="接口地址" prop="realUrl">
+          <el-input v-model="formData.realUrl" type="text" placeholder="请输入接口访问地址(例：http://**/user)" />
         </el-form-item>
         <el-form-item label="权限编码" prop="permissionCode">
           <el-input v-model="formData.permissionCode" type="text" placeholder="请输入权限编码(例：admin:user)" />
         </el-form-item>
       </el-col>
       <el-col>
-        <el-form-item label="上级权限" prop="pid">
-          <el-input v-model="formData.pid" type="text" placeholder="请选择上级权限" />
-        </el-form-item>
         <el-form-item label="状态" prop="state">
           <el-switch v-model="formData.state" active-text="启用" inactive-text="禁用" :active-value="1"
             :inactive-value="0" />
@@ -93,11 +90,15 @@ export default {
         ],
         sysId: [
           { required: true, message: '所属系统必选' }
+        ],
+        reqType: [
+          { required: true, message: '请求类型必选' }
         ]
       },
       formData: {
         id: null,
         sysId: null,
+        reqType: null,
         type: null,
         title: null,
         pid: null,

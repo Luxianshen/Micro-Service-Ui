@@ -81,7 +81,7 @@ export default {
     lock: '锁屏'
   },
   login: {
-    title: '欢迎使用demo管理系统',
+    title: 'Joysim数据中台',
     logIn: '登录',
     identifier: '账号',
     credential: '密码',

@@ -7,7 +7,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">用户数</div>
-          <count-to :start-val="0" :end-val="onlineUserNumber" :duration="2000" class="card-panel-num"/>
+          <count-to :start-val="0" :end-val="onlineUserNumber" :duration="2000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -17,8 +17,8 @@
           <svg-icon icon-class="form" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">考试数</div>
-          <count-to :start-val="0" :end-val="examinationNumber" :duration="2200" class="card-panel-num"/>
+          <div class="card-panel-text">接口请求数</div>
+          <count-to :start-val="0" :end-val="examinationNumber" :duration="2200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -28,8 +28,8 @@
           <svg-icon icon-class="chart" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">参加人数</div>
-          <count-to :start-val="0" :end-val="9280" :duration="2400" class="card-panel-num"/>
+          <div class="card-panel-text">接口调用数</div>
+          <count-to :start-val="0" :end-val="9280" :duration="2400" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -39,8 +39,8 @@
           <svg-icon icon-class="tab" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">及格率</div>
-          <count-to :start-val="0" :end-val="13600" :duration="2600" class="card-panel-num"/>
+          <div class="card-panel-text">成功率</div>
+          <count-to :start-val="0" :end-val="13600" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -92,7 +92,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .panel-group {
   margin-top: 18px;
-  .card-panel-col{
+  .card-panel-col {
     margin-bottom: 32px;
   }
   .card-panel {
@@ -103,14 +103,14 @@ export default {
     overflow: hidden;
     color: #666;
     background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
     &:hover {
       .card-panel-icon-wrapper {
         color: #fff;
       }
       .icon-people {
-         background: #40c9c6;
+        background: #40c9c6;
       }
       .icon-message {
         background: #36a3f7;
@@ -119,7 +119,7 @@ export default {
         background: #f4516c;
       }
       .icon-shoppingCard {
-        background: #34bfa3
+        background: #34bfa3;
       }
     }
     .icon-people {
@@ -132,7 +132,7 @@ export default {
       color: #f4516c;
     }
     .icon-tab {
-      color: #34bfa3
+      color: #34bfa3;
     }
     .card-panel-icon-wrapper {
       float: left;
